@@ -21,12 +21,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { signInUser, signUpUser } from "@/server/user";
+import { signUpUser } from "@/server/user";
 import { useState } from "react";
 import { Loader } from "lucide-react";
 import { toast } from "sonner";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 const formSchema = z
   .object({
@@ -39,6 +40,13 @@ const formSchema = z
     message: "Password doesn't match",
     path: ["confirmPassword"],
   });
+
+const signUp = async () => {
+  const data = await authClient.signIn.social({
+    provider: "google",
+    callbackURL: "/dashboard",
+  });
+};
 
 export function SignUpForm({
   className,
@@ -170,15 +178,20 @@ export function SignUpForm({
                       "Create Account"
                     )}
                   </Button>
-                  <Button variant="outline" className="w-full">
-                    Login with Google{" "}
+                  <Button
+                    onClick={signUp}
+                    variant="outline"
+                    className="w-full cursor-pointer"
+                    type="button"
+                  >
+                    Sign Up with Google
                   </Button>
                 </div>
               </div>
               <div className="mt-4 text-center text-sm">
                 Don&apos;t have an account?{" "}
                 <Link href="/login" className="underline underline-offset-4">
-                  Sign up
+                  Log in 
                 </Link>
               </div>
             </form>

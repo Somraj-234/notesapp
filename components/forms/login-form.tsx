@@ -28,12 +28,21 @@ import { useState } from "react";
 import { Loader } from "lucide-react";
 import { toast } from "sonner";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { createAuthClient } from "better-auth/client";
+const authClient = createAuthClient();
 
 const formSchema = z.object({
   email: z.email(),
   password: z.string().min(8),
 });
+
+const signIn = async () => {
+  const data = await authClient.signIn.social({
+    provider: "google",
+    callbackURL: "/dashboard",
+  });
+};
 
 export function LoginForm({
   className,
@@ -125,11 +134,20 @@ export function LoginForm({
                   />
                 </div>
                 <div className="flex flex-col gap-3">
-                  <Button type="submit" className="w-full" disabled={isLoading}>
+                  <Button
+                    type="submit"
+                    className="w-full cursor-pointer"
+                    disabled={isLoading}
+                  >
                     {isLoading ? <Loader className="animate-spin" /> : "Login"}
                   </Button>
-                  <Button variant="outline" className="w-full">
-                    Login with Google{" "}
+                  <Button
+                    onClick={signIn}
+                    variant="outline"
+                    className="w-full cursor-pointer"
+                    type="button"
+                  >
+                    Login with Google
                   </Button>
                 </div>
               </div>
