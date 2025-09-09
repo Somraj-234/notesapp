@@ -21,54 +21,53 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { signInUser, signUpUser } from "@/server/user";
 import { useState } from "react";
 import { Loader } from "lucide-react";
 import { toast } from "sonner";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 const formSchema = z
   .object({
-    email: z.email(),
     password: z.string().min(8),
     confirmPassword: z.string().min(8),
-    name: z.string().min(2).max(8),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password doesn't match",
     path: ["confirmPassword"],
   });
 
-export function SignUpForm({
+export function ResetPasswordForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
       password: "",
       confirmPassword: "",
-      name: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsLoading(true);
-      const response = await signUpUser(
-        values.email,
-        values.password,
-        values.name
-      );
-      if (response.success) {
-        toast.success("Please Check Email for Verification");
+      const { error } = await authClient.resetPassword({
+        newPassword: values.password,
+        token: token ?? "",
+      });
+      if (!error) {
+        toast.success("Password reset successfull");
+        router.push("/login");
       } else {
-        toast.error(response.message);
+        toast.error(error.message);
       }
     } catch (error) {
       console.log(error);
@@ -81,47 +80,15 @@ export function SignUpForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Create New account</CardTitle>
+          <CardTitle>Reset Password</CardTitle>
           <CardDescription>
-            Enter your email below to create to your account
+            Enter New Password and Don&apos;t forgot this time.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <div className="flex flex-col gap-6">
-                <div className="grid gap-3">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Name</FormLabel>
-                        <FormControl>
-                          <Input placeholder="john" {...field} />
-                        </FormControl>
-
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="grid gap-3">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input placeholder="emai@example" {...field} />
-                        </FormControl>
-
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
                 <div className="grid gap-3">
                   <FormField
                     control={form.control}
@@ -167,18 +134,15 @@ export function SignUpForm({
                     {isLoading ? (
                       <Loader className="animate-spin" />
                     ) : (
-                      "Create Account"
+                      "Reset Password"
                     )}
-                  </Button>
-                  <Button variant="outline" className="w-full">
-                    Login with Google{" "}
                   </Button>
                 </div>
               </div>
               <div className="mt-4 text-center text-sm">
-                Don&apos;t have an account?{" "}
+                Go to{" "}
                 <Link href="/login" className="underline underline-offset-4">
-                  Sign up
+                  login page
                 </Link>
               </div>
             </form>

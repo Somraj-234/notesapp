@@ -10,55 +10,52 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { signInUser } from "@/server/user";
 import { useState } from "react";
 import { Loader } from "lucide-react";
 import { toast } from "sonner";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 const formSchema = z.object({
   email: z.email(),
-  password: z.string().min(8),
 });
 
-export function LoginForm({
+export function ForgotPasswordForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      console.log("send email button clicked");
       setIsLoading(true);
-      const response = await signInUser(values.email, values.password);
-      if (response.success) {
-        router.push("/dashboard");
-        toast.success(response.message);
+      const { error } = await authClient.forgetPassword({
+        email: values.email,
+        redirectTo: "/reset-password",
+      });
+      if (!error) {
+        toast.success("Please check your email for password reset link.");
       } else {
-        toast.error(response.message);
+        toast.error(error.message);
       }
     } catch (error) {
       console.log(error);
@@ -71,9 +68,9 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>Forgot Password?</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your email to recieve reset password link
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -96,47 +93,25 @@ export function LoginForm({
                     )}
                   />
                 </div>
-                <div className="grid gap-3">
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <div className="flex items-center">
-                          <FormLabel>Password</FormLabel>
-                          <Link
-                            href="/forgot-password"
-                            className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                          >
-                            Forgot your password?
-                          </Link>
-                        </div>
-                        <FormControl>
-                          <Input
-                            type="password"
-                            placeholder="********"
-                            {...field}
-                          />
-                        </FormControl>
 
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
                 <div className="flex flex-col gap-3">
-                  <Button type="submit" className="w-full" disabled={isLoading}>
-                    {isLoading ? <Loader className="animate-spin" /> : "Login"}
-                  </Button>
-                  <Button variant="outline" className="w-full">
-                    Login with Google{" "}
+                  <Button
+                    type="submit"
+                    className="w-full cursor-pointer"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <Loader className="animate-spin" />
+                    ) : (
+                      "Send Email"
+                    )}
                   </Button>
                 </div>
               </div>
               <div className="mt-4 text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <Link href="/signup" className="underline underline-offset-4">
-                  Sign up
+                Go back to{" "}
+                <Link href="/login" className="underline underline-offset-4">
+                  Login
                 </Link>
               </div>
             </form>
