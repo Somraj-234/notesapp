@@ -21,7 +21,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { signUpUser } from "@/server/user";
+import { signUpUser } from "@/server/users";
 import { useState } from "react";
 import { Loader } from "lucide-react";
 import { toast } from "sonner";
@@ -191,7 +191,7 @@ export function SignUpForm({
               <div className="mt-4 text-center text-sm">
                 Don&apos;t have an account?{" "}
                 <Link href="/login" className="underline underline-offset-4">
-                  Log in 
+                  Log in
                 </Link>
               </div>
             </form>
