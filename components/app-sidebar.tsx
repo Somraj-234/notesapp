@@ -35,7 +35,9 @@ export async function AppSidebar({
         <div>
           <h2 className="font-semibold text-2xl">📝NotesApp</h2>
         </div>
-        <SearchForm />
+        <React.Suspense>
+          <SearchForm />
+        </React.Suspense>
       </SidebarHeader>
       <SidebarContent className="gap-0">
         {/* We create a collapsible SidebarGroup for each parent. */}
