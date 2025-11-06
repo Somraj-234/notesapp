@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "./ModeToggle";
+import WhiteGrain from "./mycomponents/grian";
 
 const menuItems = [
   { name: "Features", href: "#link" },
@@ -29,95 +30,61 @@ export const HeroHeader = () => {
     <header>
       <nav
         data-state={menuState && "active"}
-        className="fixed z-20 w-full px-2"
+        className="fixed z-20 w-full h-16"
       >
         <div
           className={cn(
-            "mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12",
-            isScrolled &&
-              "bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5"
+            "mx-auto w-full transition-all duration-300 border-b border-[#E3E2E2]",
+            isScrolled && "bg-background/50 w-full backdrop-blur-lg",
           )}
         >
-          <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
-            <div className="flex w-full justify-between lg:w-auto">
-              <Link
-                href="/"
-                aria-label="home"
-                className="flex items-center space-x-2"
-              >
+          <div className="relative flex flex-wrap items-center justify-between gap-6 lg:gap-0 ">
+            <div className="flex w-full justify-between lg:w-auto p-1.5">
+              <Link href="/" aria-label="home" className="flex items-center">
                 <Logo />
               </Link>
-
-              <button
-                onClick={() => setMenuState(!menuState)}
-                aria-label={menuState == true ? "Close Menu" : "Open Menu"}
-                className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
-              >
-                <Menu className="in-data-[state=active]:rotate-180 in-data-[state=active]:scale-0 in-data-[state=active]:opacity-0 m-auto size-6 duration-200" />
-                <X className="in-data-[state=active]:rotate-0 in-data-[state=active]:scale-100 in-data-[state=active]:opacity-100 absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200" />
-              </button>
             </div>
 
-            <div className="absolute inset-0 m-auto hidden size-fit lg:block">
-              <ul className="flex gap-8 text-sm">
-                {menuItems.map((item, index) => (
-                  <li key={index}>
+            <div className="bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
+              <div className="flex w-full flex-col h-auto justify-center sm:flex-row overflow-hidden">
+                <div className="flex items-center justify-center p-1.5 border-l border-[#E3E2E2]">
+                  <ModeToggle />
+                </div>
+                <div className="flex items-center justify-center p-1.5 border-l border-[#E3E2E2]">
+                  <div
+                    className="h-8 px-15 py-8 flex items-center justify-center rounded-none bg-gradient-to-t from-[#72D23B] to-[#B6EB8F] text-sm font-bold text-[#252525]"
+                    style={{
+                      boxShadow:
+                        "inset 0px 0px 18px 0px rgba(255,255,255,0.78)",
+                      position: "relative",
+                    }}
+                  >
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30 z-10">
+                      <filter id="grain">
+                        <feTurbulence
+                          type="fractalNoise"
+                          baseFrequency="0.9"
+                          numOctaves="4"
+                        />
+                        <feColorMatrix type="saturate" values="0" />
+                      </filter>
+                      <rect
+                        width="100%"
+                        height="100%"
+                        fill="white"
+                        filter="url(#grain)"
+                      />
+                    </svg>
+
                     <Link
-                      href={item.href}
-                      className="text-muted-foreground hover:text-accent-foreground block duration-150"
+                      className="z-20 text-xl tracking-[-1px]"
+                      href="#"
+                      style={{ fontFamily: "var(--font-styreneBold)" }}
                     >
-                      <span>{item.name}</span>
+                      <span>Log In</span>
                     </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
-              <div className="lg:hidden">
-                <ul className="space-y-6 text-base">
-                  {menuItems.map((item, index) => (
-                    <li key={index}>
-                      <Link
-                        href={item.href}
-                        className="text-muted-foreground hover:text-accent-foreground block duration-150"
-                      >
-                        <span>{item.name}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                <Button
-                  asChild
-                  variant="outline"
-                  size="sm"
-                  className={cn(isScrolled && "lg:hidden")}
-                >
-                  <Link href="/login">
-                    <span>Login</span>
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="sm"
-                  className={cn(isScrolled && "lg:hidden")}
-                >
-                <Link href="/signup">
-                    <span>Sign Up</span>
-                  </Link>
-                </Button>
-                <ModeToggle />
-                <Button
-                  asChild
-                  size="sm"
-                  className={cn(isScrolled ? "lg:inline-flex" : "hidden")}
-                >
-                  <Link href="#">
-                    <span>Get Started</span>
-                  </Link>
-                </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

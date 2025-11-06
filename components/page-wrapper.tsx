@@ -23,11 +23,11 @@ export default function PageWrapper({
 }: PageWrapperProps) {
   return (
     <div className="flex w-full h-screen flex-col">
-      <header className="flex items-center justify-between border-b p-4">
+      <header className="flex items-center justify-between border-b px-4">
         <div className="flex items-center gap-4">
-          <SidebarTrigger />
+          <SidebarTrigger className="text-[#717070]" />
           <Breadcrumb>
-            <BreadcrumbList>
+            <BreadcrumbList className="text-[#717070]">
               {breadcrumbs.map((item, index) => (
                 <div key={item.label} className="flex items-center gap-2">
                   <BreadcrumbItem>

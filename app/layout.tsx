@@ -1,18 +1,58 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import type { Metadata } from "next";
+import { Cascadia_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import localFont from "next/font/local";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const CascadiaMono = Cascadia_Mono({
+  variable: "--font-cascadia-mono",
   subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const styreneBoldItalic = localFont({
+  src: [
+    {
+      path: "../public/fonts/StyreneA-BoldItalic-Trial.otf",
+      weight: "700",
+      style: "italic",
+    },
+  ],
+  variable: "--font-styreneBoldItalic",
+  display: "swap",
+});
+const styreneBold = localFont({
+  src: [
+    {
+      path: "../public/fonts/StyreneA-Bold-Trial.otf",
+      weight: "700",
+      style: "italic",
+    },
+  ],
+  variable: "--font-styreneBold",
+  display: "swap",
+});
+
+const styreneRegular = localFont({
+  src: [
+    {
+      path: "../public/fonts/StyreneA-Regular-Trial.otf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-styreneRegular",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -26,23 +66,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${styreneBoldItalic.variable} ${styreneRegular.variable} ${styreneBold.variable} ${CascadiaMono.variable} ${plusJakartaSans.variable} antialiased `}
+    >
+      <body>
         <NuqsAdapter>
-
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-          <Toaster />
-        </ThemeProvider>{" "}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster />
+          </ThemeProvider>
         </NuqsAdapter>
-
       </body>
     </html>
   );

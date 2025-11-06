@@ -12,8 +12,8 @@ export function LogOut() {
   };
 
   return (
-    <div>
-      <Button onClick={handleLogout} className="bg-red-500">
+    <div className="p-6 border-l border-[#E3E2E2] flex items-center justify-center">
+      <Button onClick={handleLogout} className="">
         Log out
       </Button>
     </div>

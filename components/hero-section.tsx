@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronRight, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
@@ -71,57 +71,101 @@ export default function HeroSection() {
               className="absolute inset-0 -z-20"
             >
               <Image
-                src="https://ik.imagekit.io/lrigu76hy/tailark/night-background.jpg?updatedAt=1745733451120"
+                src="/palm-branch.png"
                 alt="background"
-                className="absolute inset-x-0 top-56 -z-20 hidden lg:top-32 dark:block"
-                width="3276"
-                height="4095"
+                className="absolute rotate-[64deg] inset-x-0 top-56 -z-50 lg:top-0 -left-8 opacity-[4%] blur-3xl"
+                style={{
+                  filter: "contrast(100%) brightness(0%) saturate(0%)",
+                }}
+                width="812"
+                height="541"
               />
             </AnimatedGroup>
-            <div className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--color-background)_75%)]"></div>
-            <div className="mx-auto max-w-7xl px-6">
+            <div className="absolute inset-0 -z-10 size-full"></div>
+            <div className="mx-auto max-w-7xl px-6 ">
               <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
                 <AnimatedGroup variants={transitionVariants}>
                   <Link
                     href="#link"
-                    className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
+                    className="mx-auto flex w-fit items-center gap-1 -mb-16"
+                    style={{ fontFamily: "var(--font-styreneRegular)" }}
                   >
-                    <span className="text-foreground text-sm">
-                      Introducing Support for AI Models
+                    <span className="flex size-4">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        className="m-auto size-4"
+                      >
+                        <defs>
+                          <linearGradient
+                            id="github-gradient"
+                            x1="0%"
+                            y1="100%"
+                            x2="0%"
+                            y2="0%"
+                          >
+                            <stop offset="0%" stopColor="#72D23B" />
+                            <stop offset="100%" stopColor="#B6EB8F" />
+                          </linearGradient>
+                        </defs>
+                        <path
+                          d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                          fill="url(#github-gradient)"
+                          stroke="#389E0E"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M9 18c-4.51 2-5-2-7-2"
+                          fill="url(#github-gradient)"
+                          stroke="#389E0E"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                     </span>
-                    <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
-
-                    <div className="bg-background group-hover:bg-muted size-6 overflow-hidden rounded-full duration-500">
-                      <div className="flex w-12 -translate-x-1/2 duration-500 ease-in-out group-hover:translate-x-0">
-                        <span className="flex size-6">
-                          <ArrowRight className="m-auto size-3" />
-                        </span>
-                        <span className="flex size-6">
-                          <ArrowRight className="m-auto size-3" />
-                        </span>
-                      </div>
-                    </div>
+                    <span className="text-foreground text-base">
+                      Proudly Open Source
+                    </span>
                   </Link>
                 </AnimatedGroup>
 
-                <TextEffect
-                  preset="fade-in-blur"
-                  speedSegment={0.3}
-                  as="h1"
-                  className="mt-8 text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]"
-                >
-                  Modern Solutions for Customer Engagement
-                </TextEffect>
+                <div className="flex flex-col items-center justify-center -space-y-8 md:-space-y-8 lg:-space-y-16 xl:-space-y-16">
+                  <TextEffect
+                    preset="fade-in-blur"
+                    speedSegment={0.3}
+                    as="h1"
+                    className="mt-8 mx-auto max-w-2xl text-6xl md:text-7xl lg:mt-16 xl:text-[100px] capitalize tracking-[-8px]"
+                    style={{ fontFamily: "var(--font-styreneBoldItalic)" }}
+                  >
+                    Quiet space
+                  </TextEffect>
+                  <TextEffect
+                    preset="fade-in-blur"
+                    speedSegment={0.3}
+                    as="h1"
+                    className="mt-8 mx-auto max-w-4xl text-6xl md:text-7xl lg:mt-16 xl:text-[100px] capitalize tracking-[-8px]"
+                    style={{ fontFamily: "var(--font-styreneBoldItalic)" }}
+                  >
+                    for your thoughts.
+                  </TextEffect>
+                </div>
                 <TextEffect
                   per="line"
                   preset="fade-in-blur"
                   speedSegment={0.3}
                   delay={0.5}
                   as="p"
-                  className="mx-auto mt-8 max-w-2xl text-balance text-lg"
+                  className="mx-auto mt-8 max-w-4xl  text-xl"
+                  style={{ fontFamily: "var(--font-styreneRegular)" }}
                 >
-                  Highly customizable components for building modern websites
-                  and applications that look and feel the way you mean it.
+                  PalmPaper brings the warmth of paper to the clarity of modern
+                  notes. PalmPaper keeps your writing personal, private, and
+                  beautifully simple.
                 </TextEffect>
 
                 <AnimatedGroup
@@ -139,30 +183,55 @@ export default function HeroSection() {
                   className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
                 >
                   <div
-                    key={1}
-                    className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                    className="h-8 px-15 py-8 flex items-center justify-center rounded-none bg-gradient-to-t from-[#40A8FF] to-[#91D4FE] text-sm font-bold text-white"
+                    style={{
+                      boxShadow:
+                        "inset 0px 0px 18px 0px rgba(255,255,255,0.78)",
+                      position: "relative",
+                    }}
                   >
-                    <Button
-                      asChild
-                      size="lg"
-                      className="rounded-xl px-5 text-base"
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30 z-10">
+                      <filter id="grain">
+                        <feTurbulence
+                          type="fractalNoise"
+                          baseFrequency="0.9"
+                          numOctaves="4"
+                        />
+                        <feColorMatrix type="saturate" values="0" />
+                      </filter>
+                      <rect
+                        width="100%"
+                        height="100%"
+                        fill="white"
+                        filter="url(#grain)"
+                      />
+                    </svg>
+
+                    <Link
+                      className="z-20 flex items-center justify-center gap-2"
+                      href="#"
+                      style={{ fontFamily: "var(--font-styreneBold)" }}
                     >
-                      <Link href="#link">
-                        <span className="text-nowrap">Start Building</span>
-                      </Link>
-                    </Button>
-                  </div>
-                  <Button
-                    key={2}
-                    asChild
-                    size="lg"
-                    variant="ghost"
-                    className="h-10.5 rounded-xl px-5"
-                  >
-                    <Link href="#link">
-                      <span className="text-nowrap">Request a demo</span>
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M13.0209 0L18.6777 5.65686L5.65691 18.6777L6.13522e-05 18.6777L6.06779e-05 13.0208L13.0209 0ZM13.0209 2.82843L11.5978 4.25148L14.4262 7.07991L15.8493 5.65686L13.0209 2.82843ZM13.012 8.49413L10.1836 5.6657L2.00006 13.8492L2.00006 16.6777L4.82849 16.6777L13.012 8.49413Z"
+                          fill="white"
+                        />
+                      </svg>
+
+                      <span className="text-xl tracking-[-1px]">
+                        Write Your First Note
+                      </span>
                     </Link>
-                  </Button>
+                  </div>
                 </AnimatedGroup>
               </div>
             </div>
