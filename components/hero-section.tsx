@@ -7,6 +7,7 @@ import Image from "next/image";
 import { HeroHeader } from "@/components/header";
 import { AnimatedGroup } from "./ui/animated-group";
 import { TextEffect } from "./ui/text-effect";
+import StickyNote from "./mycomponents/sticky-note";
 
 const transitionVariants = {
   item: {
@@ -135,6 +136,21 @@ export default function HeroSection() {
                 </AnimatedGroup>
 
                 <div className="flex flex-col items-center justify-center -space-y-8 md:-space-y-8 lg:-space-y-16 xl:-space-y-16">
+                  <div className="absolute rigth-0 top-96 w-full flex  justify-end">
+                    <StickyNote
+                      rotate={-13.16}
+                      primaryColor={"#FCB46D"}
+                      secondaryColor={"#F5AD65"}
+                    />
+                  </div>
+                  <div className="absolute left-14 top-96 w-full h-96 flex items-end  justify-start z-40">
+                    <StickyNote
+                      rotate={10.16}
+                      primaryColor={"#FFF06A"}
+                      secondaryColor={"#F8EA6A"}
+                      content="Problems are just opportunities that haven't presented themselves"
+                    />
+                  </div>
                   <TextEffect
                     preset="fade-in-blur"
                     speedSegment={0.3}
@@ -186,11 +202,11 @@ export default function HeroSection() {
                     className="h-8 px-15 py-8 flex items-center justify-center rounded-none bg-gradient-to-t from-[#40A8FF] to-[#91D4FE] text-sm font-bold text-white"
                     style={{
                       boxShadow:
-                        "inset 0px 0px 18px 0px rgba(255,255,255,0.78)",
+                        "inset 0px 0px 15px 0px rgba(255,255,255,0.78)",
                       position: "relative",
                     }}
                   >
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30 z-10">
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-10 z-10">
                       <filter id="grain">
                         <feTurbulence
                           type="fractalNoise"
@@ -254,20 +270,13 @@ export default function HeroSection() {
                   aria-hidden
                   className="bg-linear-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
                 />
-                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
+                <div className="relative mx-auto max-w-6xl overflow-hidden p-4">
                   <Image
-                    className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block"
-                    src="/window.svg"
+                    className="z-2 object-cover  relative"
+                    src="/hero-dashboard.png"
                     alt="app screen"
-                    width="2700"
-                    height="1440"
-                  />
-                  <Image
-                    className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden"
-                    src="/window.svg"
-                    alt="app screen"
-                    width="2700"
-                    height="1440"
+                    width="2248"
+                    height="1600"
                   />
                 </div>
               </div>

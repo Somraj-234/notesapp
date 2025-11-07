@@ -14,20 +14,22 @@ import {
 
 export function ModeToggle() {
   const { setTheme, theme } = useTheme();
-
   return (
-    <div className="p-6 flex items-center justify-center ">
-      <button className="flex items-center justify-center relative">
+    <div className="flex items-center justify-center">
+      <button
+        className="flex items-center justify-center relative p-6 cursor-pointer"
+        onClick={() =>
+          theme === "light" ? setTheme("dark") : setTheme("light")
+        }
+      >
         {theme === "light" ? (
           <Sun
             size={14}
-            onClick={() => setTheme("dark")}
             className="scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90 "
           />
         ) : (
           <Moon
             size={14}
-            onClick={() => setTheme("light")}
             className={`scale-0 rotate-90 transition-all dark:scale-100 font-light dark:rotate-0`}
           />
         )}
