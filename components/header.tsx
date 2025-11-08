@@ -30,7 +30,7 @@ export const HeroHeader = () => {
     <header>
       <nav
         data-state={menuState && "active"}
-        className="fixed z-20 w-full h-16"
+        className="fixed z-50 w-full h-16"
       >
         <div
           className={cn(

@@ -55,7 +55,7 @@ const StickyNote = ({
           className="w-full h-10 mb-4"
           style={{ backgroundColor: secondaryColor }}
         />
-        <p className="text-sm p-4 z-20">{content}</p>
+        <p className="text-xs p-4 z-20">{content}</p>
       </div>
     </div>
   );
