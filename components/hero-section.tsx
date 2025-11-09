@@ -136,14 +136,16 @@ export default function HeroSection() {
                 </AnimatedGroup>
 
                 <div className="flex flex-col items-center justify-center -space-y-8 md:-space-y-8 lg:-space-y-16 xl:-space-y-16">
-                  <div className="absolute rigth-0 top-96 w-full flex  justify-end">
+                  <div className="absolute rigth-0 top-96 w-full flex justify-end">
                     <StickyNote
                       rotate={-13.16}
                       primaryColor={"#FCB46D"}
                       secondaryColor={"#F5AD65"}
                     />
                   </div>
-                  <div className="absolute left-14 top-96 w-full h-96 flex items-end  justify-start z-40">
+                  <div
+                    className="absolute left-14 top-96 w-full h-96 flex items-end justify-start z-10 pointer-events-none"
+                  >
                     <StickyNote
                       rotate={10.16}
                       primaryColor={"#FFF06A"}
@@ -199,7 +201,7 @@ export default function HeroSection() {
                   className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
                 >
                   <div
-                    className="h-8 px-15 py-8 flex items-center justify-center rounded-none bg-gradient-to-t from-[#40A8FF] to-[#91D4FE] text-sm font-bold text-white"
+                    className="h-8 px-15 py-8 flex items-center justify-center rounded-none bg-gradient-to-t from-[#40A8FF] to-[#91D4FE] text-sm font-bold text-white cursor-pointer"
                     style={{
                       boxShadow:
                         "inset 0px 0px 15px 0px rgba(255,255,255,0.78)",
@@ -222,10 +224,9 @@ export default function HeroSection() {
                         filter="url(#grain)"
                       />
                     </svg>
-
                     <Link
-                      className="z-20 flex items-center justify-center gap-2"
-                      href="#"
+                      className="z-20 flex items-center justify-center gap-2 "
+                      href="/signup"
                       style={{ fontFamily: "var(--font-styreneBold)" }}
                     >
                       <svg

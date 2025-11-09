@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "./ModeToggle";
-import WhiteGrain from "./mycomponents/grian";
 
 const menuItems = [
   { name: "Features", href: "#link" },
@@ -77,8 +76,8 @@ export const HeroHeader = () => {
                     </svg>
 
                     <Link
-                      className="z-20 text-xl tracking-[-1px]"
-                      href="#"
+                      className="z-20 text-lg tracking-[-1px]"
+                      href="/login"
                       style={{ fontFamily: "var(--font-styreneBold)" }}
                     >
                       <span>Log In</span>

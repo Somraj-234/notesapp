@@ -31,6 +31,17 @@ const styreneBoldItalic = localFont({
   variable: "--font-styreneBoldItalic",
   display: "swap",
 });
+// const styreneItalic = localFont({
+//   src: [
+//     {
+//       path: "../public/fonts/StyreneA-Italic-Trial.otf",
+//       weight: "700",
+//       style: "italic",
+//     },
+//   ],
+//   variable: "--font-styreneItalic",
+//   display: "swap",
+// });
 const styreneBold = localFont({
   src: [
     {
