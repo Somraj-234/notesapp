@@ -1,4 +1,5 @@
-import { cn } from "@/lib/utils";
+"use client"
+import { useRouter } from "next/navigation";
 
 export const Logo = ({
   className,
@@ -7,8 +8,13 @@ export const Logo = ({
   className?: string;
   uniColor?: boolean;
 }) => {
+  const router = useRouter();
+
   return (
-    <div className="flex items-center justify-start gap-2">
+    <div
+      className="flex items-center justify-start gap-2 cursor-pointer"
+      onClick={() => router.push("/")}
+    >
       <svg
         width="28"
         height="28"
@@ -112,8 +118,12 @@ export const LogoIcon = ({
   className?: string;
   uniColor?: boolean;
 }) => {
+  const router = useRouter();
+
   return (
     <svg
+    className="cursor-pointer"
+      onClick={() => router.push("/")}
       width="28"
       height="28"
       viewBox="0 0 28 28"

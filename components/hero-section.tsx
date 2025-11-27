@@ -1,7 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, ChevronRight, Github } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 import { HeroHeader } from "@/components/header";
